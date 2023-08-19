@@ -2,7 +2,7 @@
 A random Deno module for parsing BEDEV1/BEDEV2 Roblox errors form the responses, since Roblox is extremely inconsistent. This will also parse `x-roblox-system-reason` on the few endpoints that give it.
 
 ### Usage
-### BEDEV1 (anything except apis.roblox.com)
+#### BEDEV1 (anything except apis.roblox.com)
 ```typescript
 import { parseBEDEV1Error } from "https://deno.land/x/parse_roblox_errors@1.0.2/mod.ts";
 
