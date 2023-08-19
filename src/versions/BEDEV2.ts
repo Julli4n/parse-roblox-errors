@@ -24,9 +24,9 @@ type BEDEV2ErrorResponse = string | string[] | {
         Message?: string;
     };
 } | {
-    error: string;
-    message: string;
-    errorDetails: { errorDetailType: string; datastoreErrorCode: string }[];
+    error?: string;
+    message?: string;
+    errorDetails?: { errorDetailType: string; datastoreErrorCode: string }[];
 };
 
 type ChildError = { type: string; code: string };
@@ -130,7 +130,7 @@ export async function parseBEDEV2Error(
                                     code: json.error,
                                     message: json.message!,
                                     childErrors: "errorDetails" in json
-                                        ? json.errorDetails.map((error) => {
+                                        ? json.errorDetails!.map((error) => {
                                             return {
                                                 type: error.errorDetailType,
                                                 code: error.datastoreErrorCode,
