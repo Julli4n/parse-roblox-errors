@@ -16,6 +16,11 @@ type BEDEV2ErrorResponse = string | string[] | {
     code?: number;
     message?: string;
 } | {
+    errorCode?: string;
+    errorMessage?: string;
+    field?: string;
+    hint?: string | null;
+} | {
     errorCode?: number;
     message?: string;
 } | {
@@ -34,6 +39,8 @@ type ChildError = { type: string; code: string };
 export type BEDEV2Error = {
     code?: number | string;
     message: string;
+    field?: string;
+    hint?: string;
     childErrors?: ChildError[];
 };
 
@@ -106,7 +113,8 @@ export async function parseBEDEV2Error(
                                     (json.errors) as Record<string, string[]>,
                                 ).map(([index, value]) =>
                                     ({
-                                        message: `${index}(${value.join(", ")})`,
+                                        message: value.join(","),
+                                        field: index,
                                     })
                                 ));
                                 return errors;
@@ -146,16 +154,26 @@ export async function parseBEDEV2Error(
                             if ("errorCode" in json) {
                                 errors.push({
                                     code: json.errorCode,
-                                    message: (json.message as string),
+                                    message: json.message!,
                                 });
                                 return errors;
                             } else if ("code" in json) {
                                 errors.push({
                                     code: json.code,
-                                    message: (json.message as string),
+                                    message: json.message!,
                                 });
                                 return errors;
                             }
+                        }
+
+                        if ("errorMessage" in json) {
+                            errors.push({
+                                code: json.errorCode,
+                                message: json.errorMessage!,
+                                field: json.field,
+                                hint: json.hint ?? undefined,
+                            });
+                            return errors;
                         }
 
                         if ("Error" in json) {

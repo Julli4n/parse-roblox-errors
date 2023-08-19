@@ -8,6 +8,7 @@ type BEDEV1ErrorResponse = string | {
         field?: string;
         fieldData?: string;
         retryable?: boolean;
+        hint?: string;
     }[];
 } | {
     code: string | number;
