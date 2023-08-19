@@ -18,6 +18,7 @@ type BEDEV2ErrorResponse = string | string[] | {
 } | {
     errorCode?: string;
     errorMessage?: string;
+    failureReason?: string;
     field?: string;
     hint?: string | null;
 } | {
@@ -168,7 +169,7 @@ export async function parseBEDEV2Error(
 
                         if ("errorMessage" in json) {
                             errors.push({
-                                code: json.errorCode,
+                                code: json.errorCode ?? json.failureReason,
                                 message: json.errorMessage!,
                                 field: json.field,
                                 hint: json.hint ?? undefined,
