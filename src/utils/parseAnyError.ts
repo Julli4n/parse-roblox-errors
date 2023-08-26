@@ -27,10 +27,8 @@ export async function parseAnyError<T>(
     const text = body();
 
     let length = 0;
-    if (headers) {
-        if (headers.has("content-length")) {
-            length = parseInt(headers.get("content-length")!, 10);
-        }
+    if (headers && headers.has("content-length")) {
+        length = parseInt(headers.get("content-length")!, 10);
     } else {
         length = (await text).length;
     }
