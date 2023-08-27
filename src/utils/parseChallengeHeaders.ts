@@ -22,7 +22,13 @@ export type ParsedChallenge = {
 export function parseChallengeHeaders(
     headers: Headers,
 ): ParsedChallenge | null {
-    if (!headers.has(GENERIC_CHALLENGE_TYPE_HEADER)) {
+    if (
+        ![
+            GENERIC_CHALLENGE_TYPE_HEADER,
+            GENERIC_CHALLENGE_ID_HEADER,
+            GENERIC_CHALLENGE_METADATA_HEADER,
+        ].every((item) => headers.has(item))
+    ) {
         return null;
     }
 
