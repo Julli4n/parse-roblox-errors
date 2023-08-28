@@ -12,6 +12,10 @@ type BEDEV2ErrorResponse = string | string[] | {
 } | {
     code?: number | string;
     message?: string;
+    errors?: {
+        code?: number | string;
+        message?: string;
+    }[];
 } | {
     error?: string;
     code?: number;
@@ -52,10 +56,20 @@ export function parseBEDEV2ErrorFromJSON(
         } else {
             if ("errors" in json) {
                 if (json.errors instanceof Array) {
-                    return json.errors.map((error) => ({
+                    const errors = json.errors.map((error) => ({
                         code: error.code,
                         message: error.message ?? "???",
                     }));
+                    if ("code" in json) {
+                        return [
+                            {
+                                code: json.code,
+                                message: json.message ?? "???",
+                                childErrors: errors
+                            }
+                        ];
+                    }
+                    return errors;
                 } else {
                     return Object.entries(
                         (json.errors) as Record<
