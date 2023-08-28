@@ -15,6 +15,7 @@ type BEDEV2ErrorResponse = string | string[] | {
     errors?: {
         code?: number | string;
         message?: string;
+        field?: string;
     }[];
 } | {
     error?: string;

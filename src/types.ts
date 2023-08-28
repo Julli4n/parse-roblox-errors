@@ -1,4 +1,4 @@
-type ChildError = { type: string; code: string } | { code: string | number | undefined; message: string; };
+type ChildError = { type: string; code: string } | { code: string | number | undefined; message: string; field?: string; };
 
 export type AnyError = {
     code?: string | number;
