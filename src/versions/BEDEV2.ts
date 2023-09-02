@@ -39,6 +39,9 @@ type BEDEV2ErrorResponse = string | string[] | {
     error?: string;
     message?: string;
     errorDetails?: { errorDetailType: string; datastoreErrorCode: string }[];
+} | {
+    status?: string;
+    message?: string;
 };
 
 export function parseBEDEV2ErrorFromJSON(
@@ -121,6 +124,11 @@ export function parseBEDEV2ErrorFromJSON(
                         code: json.code,
                         message: json.message!,
                     }];
+                } else if ("status" in json) {
+                    return [{
+                        code: json.status!,
+                        message: json.message!
+                    }]
                 }
             }
 
@@ -143,6 +151,14 @@ export function parseBEDEV2ErrorFromJSON(
                         message: json.Error.Message!,
                     }];
                 }
+            }
+
+            if ("code" in json) {
+                // nothing else..
+                return [{
+                    code: json.code!,
+                    message: json.code?.toString() ?? "???"
+                }]
             }
 
             return [{
