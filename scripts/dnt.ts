@@ -9,12 +9,31 @@ await build({
     },
     skipSourceOutput: true,
     shims: {
-        deno: true
+        deno: true,
+        customDev: [
+            {
+                package: {
+                    name: "whatwg-mimetype",
+                    version: "^3.0.0"
+                },
+                globalNames: [],
+                typesPackage: {
+                    name: "@types/whatwg-mimetype",
+                    version: "^2.1.1"
+                }
+            }
+        ]
+    },
+    mappings: {
+        "https://esm.sh/v132/whatwg-mimetype@3.0.0": {
+            name: "whatwg-mimetype",
+            version: "^3.0.0"
+        },
     },
     package: {
         name: "parse-roblox-errors",
         description: "A Deno/NodeJS module to parse Roblox errors",
-        version: "0.1.2",
+        version: "1.1.3",
         homepage: "https://github.com/Julli4n/parse-roblox-errors",
         author: "Julli4n",
         bugs: {
