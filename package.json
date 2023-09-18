@@ -1,0 +1,38 @@
+{
+  "module": "./esm/mod.js",
+  "main": "./script/mod.js",
+  "name": "parse-roblox-errors",
+  "description": "A Deno/NodeJS module to parse Roblox errors",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Julli4n/parse-roblox-errors",
+  "author": "Julli4n",
+  "bugs": {
+    "url": "https://github.com/Julli4n/parse-roblox-errors/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Julli4n/parse-roblox-errors.git"
+  },
+  "keywords": [
+    "roblox",
+    "api"
+  ],
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./esm/mod.js",
+      "require": "./script/mod.js"
+    }
+  },
+  "scripts": {
+    "test": "node test_runner.js"
+  },
+  "dependencies": {
+    "whatwg-mimetype": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "picocolors": "^1.0.0",
+    "@deno/shim-deno": "~0.16.1"
+  }
+}
