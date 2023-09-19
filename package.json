@@ -22,6 +22,10 @@
     ".": {
       "import": "./esm/mod.js",
       "require": "./script/mod.js"
+    },
+    "challenge": {
+      "import": "./esm/src/utils/parseChallengeHeaders.js",
+      "require": "./script/src/utils/parseChallengeHeaders.js"
     }
   },
   "scripts": {
