@@ -36,7 +36,7 @@ await build({
     package: {
         name: "parse-roblox-errors",
         description: "A Deno/NodeJS module to parse Roblox errors",
-        version: "1.1.3",
+        version: "1.1.4",
         homepage: "https://github.com/Julli4n/parse-roblox-errors",
         author: "Julli4n",
         bugs: {

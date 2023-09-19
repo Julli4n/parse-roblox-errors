@@ -9,7 +9,7 @@ since Roblox is extremely inconsistent. This will also parse
 #### BEDEV1 (anything except apis.roblox.com)
 
 ```typescript
-import { parseBEDEV1Error } from "https://deno.land/x/parse_roblox_errors@1.1.3/mod.ts";
+import { parseBEDEV1Error } from "https://deno.land/x/parse_roblox_errors@1.1.4/mod.ts";
 
 console.log(
     await fetch("http://auth.roblox.com/v2/signup").then(parseBEDEV1Error),
@@ -26,7 +26,7 @@ console.log(
 What the module was made for.
 
 ```typescript
-import { parseBEDEV2Error } from "https://deno.land/x/parse_roblox_errors@1.1.3/mod.ts";
+import { parseBEDEV2Error } from "https://deno.land/x/parse_roblox_errors@1.1.4/mod.ts";
 
 console.log(
     await fetch("https://apis.roblox.com/explore-api/v1/get-sort-content").then(
