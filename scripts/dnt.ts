@@ -2,7 +2,10 @@ import { build } from "https://deno.land/x/dnt@0.38.1/mod.ts";
 import { copy } from "https://deno.land/std@0.201.0/fs/mod.ts";
 
 await build({
-    entryPoints: ["./mod.ts"],
+    entryPoints: ["./mod.ts", {
+        name: "challenge",
+        path: "./src/utils/parseChallengeHeaders.ts"
+    }],
     outDir: "./npm",
     compilerOptions: {
         lib: ["ES2021", "DOM"],
