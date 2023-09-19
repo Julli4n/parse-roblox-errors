@@ -2,10 +2,10 @@ import { build } from "https://deno.land/x/dnt@0.38.1/mod.ts";
 import { copy } from "https://deno.land/std@0.201.0/fs/mod.ts";
 
 await build({
-    entryPoints: ["./mod.ts", {
-        name: "./challenge",
-        path: "./challenge.ts"
-    }],
+    entryPoints: ["./mod.ts", ...["", "esm/", "script/"].map(prefix => ({
+        name: `./${prefix}challenge`,
+        path: `./challenge.ts`
+    }))],
     outDir: "./npm",
     compilerOptions: {
         lib: ["ES2021", "DOM"],
@@ -36,7 +36,7 @@ await build({
     package: {
         name: "parse-roblox-errors",
         description: "A Deno/NodeJS module to parse Roblox errors",
-        version: "1.1.6",
+        version: "1.1.7",
         homepage: "https://github.com/Julli4n/parse-roblox-errors",
         author: "Julli4n",
         bugs: {
