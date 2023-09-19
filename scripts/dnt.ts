@@ -4,7 +4,7 @@ import { copy } from "https://deno.land/std@0.201.0/fs/mod.ts";
 await build({
     entryPoints: ["./mod.ts", {
         name: "./challenge",
-        path: "./src/utils/parseChallengeHeaders.ts"
+        path: "./challenge.ts"
     }],
     outDir: "./npm",
     compilerOptions: {
@@ -36,7 +36,7 @@ await build({
     package: {
         name: "parse-roblox-errors",
         description: "A Deno/NodeJS module to parse Roblox errors",
-        version: "1.1.5",
+        version: "1.1.6",
         homepage: "https://github.com/Julli4n/parse-roblox-errors",
         author: "Julli4n",
         bugs: {
