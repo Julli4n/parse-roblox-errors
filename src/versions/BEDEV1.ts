@@ -50,3 +50,11 @@ export function parseBEDEV1Error(response: Response) {
         response.headers,
     );
 }
+
+export function parseBEDEV1ErrorFromStringAndHeaders(text: string, headers: Headers) {
+  return parseAnyError(
+    () => text.trim(),
+    parseBEDEV1ErrorFromJSON,
+    headers,
+  );
+}

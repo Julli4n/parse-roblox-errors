@@ -186,3 +186,11 @@ export function parseBEDEV2Error(response: Response) {
         response.headers,
     );
 }
+
+export function parseBEDEV2ErrorFromStringAndHeaders(text: string, headers: Headers) {
+  return parseAnyError(
+    () => text.trim(),
+    parseBEDEV2ErrorFromJSON,
+    headers,
+  );
+}
