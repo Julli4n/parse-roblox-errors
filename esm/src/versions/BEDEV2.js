@@ -124,3 +124,6 @@ export function parseBEDEV2ErrorFromString(text, contentType) {
 export function parseBEDEV2Error(response) {
     return parseAnyError(() => response.clone().text().then((text) => text.trim()), parseBEDEV2ErrorFromJSON, response.headers);
 }
+export function parseBEDEV2ErrorFromStringAndHeaders(text, headers) {
+    return parseAnyError(() => text.trim(), parseBEDEV2ErrorFromJSON, headers);
+}

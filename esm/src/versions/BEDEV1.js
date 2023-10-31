@@ -22,3 +22,6 @@ export function parseBEDEV1ErrorFromString(text, contentType) {
 export function parseBEDEV1Error(response) {
     return parseAnyError(() => response.text().then((text) => text.trim()), parseBEDEV1ErrorFromJSON, response.headers);
 }
+export function parseBEDEV1ErrorFromStringAndHeaders(text, headers) {
+    return parseAnyError(() => text.trim(), parseBEDEV1ErrorFromJSON, headers);
+}

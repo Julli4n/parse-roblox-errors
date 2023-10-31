@@ -16,4 +16,5 @@ type BEDEV1ErrorResponse = string | {
 export declare function parseBEDEV1ErrorFromJSON(json: BEDEV1ErrorResponse): AnyError[];
 export declare function parseBEDEV1ErrorFromString(text: string, contentType: string): Promise<AnyError[]>;
 export declare function parseBEDEV1Error(response: Response): Promise<AnyError[]>;
+export declare function parseBEDEV1ErrorFromStringAndHeaders(text: string, headers: Headers): Promise<AnyError[]>;
 export {};

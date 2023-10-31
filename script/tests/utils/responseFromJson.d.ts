@@ -1,1 +1,1 @@
-export declare function responseFromJSON(data: unknown, headers?: Record<string, string>): Response;
+export declare function responseFromJSON(data: unknown, headers?: Record<string, string>): any;

@@ -47,4 +47,5 @@ type BEDEV2ErrorResponse = string | string[] | {
 export declare function parseBEDEV2ErrorFromJSON(json: BEDEV2ErrorResponse): AnyError[];
 export declare function parseBEDEV2ErrorFromString(text: string, contentType: string): Promise<AnyError[]>;
 export declare function parseBEDEV2Error(response: Response): Promise<AnyError[]>;
+export declare function parseBEDEV2ErrorFromStringAndHeaders(text: string, headers: Headers): Promise<AnyError[]>;
 export {};
