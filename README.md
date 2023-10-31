@@ -12,12 +12,12 @@ since Roblox is extremely inconsistent. This will also parse
 import { parseBEDEV1Error } from "https://deno.land/x/parse_roblox_errors@1.1.7/mod.ts";
 
 console.log(
-    await fetch("http://auth.roblox.com/v2/signup").then(parseBEDEV1Error),
+  await fetch("http://auth.roblox.com/v2/signup").then(parseBEDEV1Error),
 );
 console.log(
-    await fetch("https://develop.roblox.com/v1/assets?assetIds=1818").then(
-        parseBEDEV1Error,
-    ),
+  await fetch("https://develop.roblox.com/v1/assets?assetIds=1818").then(
+    parseBEDEV1Error,
+  ),
 );
 ```
 
@@ -29,14 +29,14 @@ What the module was made for.
 import { parseBEDEV2Error } from "https://deno.land/x/parse_roblox_errors@1.1.7/mod.ts";
 
 console.log(
-    await fetch("https://apis.roblox.com/explore-api/v1/get-sort-content").then(
-        parseBEDEV2Error,
-    ),
+  await fetch("https://apis.roblox.com/explore-api/v1/get-sort-content").then(
+    parseBEDEV2Error,
+  ),
 );
 console.log(
-    await fetch("https://apis.roblox.com/toolbox-service/v1/items/details")
-        .then(
-            parseBEDEV2Error,
-        ),
+  await fetch("https://apis.roblox.com/toolbox-service/v1/items/details")
+    .then(
+      parseBEDEV2Error,
+    ),
 );
 ```
