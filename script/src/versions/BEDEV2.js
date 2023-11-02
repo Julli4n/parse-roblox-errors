@@ -27,8 +27,8 @@ function parseBEDEV2ErrorFromJSON(json) {
                             {
                                 code: json.code,
                                 message: json.message ?? "???",
-                                childErrors: errors
-                            }
+                                childErrors: errors,
+                            },
                         ];
                     }
                     return errors;
@@ -84,7 +84,7 @@ function parseBEDEV2ErrorFromJSON(json) {
                 else if ("status" in json) {
                     return [{
                             code: json.status,
-                            message: json.message
+                            message: json.message,
                         }];
                 }
             }
@@ -109,7 +109,7 @@ function parseBEDEV2ErrorFromJSON(json) {
                 // nothing else..
                 return [{
                         code: json.code,
-                        message: json.code?.toString() ?? "???"
+                        message: json.code?.toString() ?? "???",
                     }];
             }
             return [{
