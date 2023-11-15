@@ -25,6 +25,7 @@ type BEDEV2ErrorResponse = string | string[] | {
     failureReason?: number;
     field?: string;
     hint?: string | null;
+    clientHint?: string | null;
 } | {
     errorCode?: number;
     message?: string;
@@ -42,6 +43,12 @@ type BEDEV2ErrorResponse = string | string[] | {
     }[];
 } | {
     status?: string;
+    message?: string;
+} | {
+    errorType: string;
+    errorMessage?: string;
+} | {
+    status_code?: number;
     message?: string;
 };
 export declare function parseBEDEV2ErrorFromJSON(json: BEDEV2ErrorResponse): AnyError[];

@@ -3,9 +3,11 @@ export function parseBEDEV2ErrorFromJSON(json) {
     try {
         if (typeof json === "string") {
             // in some contextes, it can be a string
-            return [{
+            return [
+                {
                     message: json,
-                }];
+                },
+            ];
         }
         else if (Array.isArray(json)) {
             return json.map((errorMessage) => ({
@@ -31,7 +33,7 @@ export function parseBEDEV2ErrorFromJSON(json) {
                     return errors;
                 }
                 else {
-                    return Object.entries((json.errors)).map(([index, value]) => ({
+                    return Object.entries(json.errors).map(([index, value]) => ({
                         message: value.join(","),
                         field: index,
                     }));
@@ -39,19 +41,24 @@ export function parseBEDEV2ErrorFromJSON(json) {
             }
             if ("error" in json) {
                 if ("code" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.code,
                             message: json.error,
-                        }];
+                        },
+                    ];
                 }
                 else if ("error_description" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.error,
                             message: json.error_description,
-                        }];
+                        },
+                    ];
                 }
                 else if ("message" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.error,
                             message: json.message,
                             childErrors: "errorDetails" in json
@@ -62,56 +69,86 @@ export function parseBEDEV2ErrorFromJSON(json) {
                                     };
                                 })
                                 : [],
-                        }];
+                        },
+                    ];
                 }
             }
             if ("message" in json) {
                 if ("errorCode" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.errorCode,
                             message: json.message,
-                        }];
+                        },
+                    ];
                 }
                 else if ("code" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.code,
                             message: json.message,
-                        }];
+                        },
+                    ];
                 }
                 else if ("status" in json) {
-                    return [{
+                    return [
+                        {
                             code: json.status,
                             message: json.message,
+                        },
+                    ];
+                }
+                else if ("status_code" in json) {
+                    return [{
+                            code: json.status_code,
+                            message: json.message ?? "???",
                         }];
                 }
             }
             if ("errorMessage" in json) {
-                return [{
-                        code: json.errorCode ?? json.failureReason,
-                        message: json.errorMessage,
-                        field: json.field,
-                        hint: json.hint ?? undefined,
-                    }];
+                if ("errorType" in json) {
+                    return [
+                        {
+                            code: json.errorType,
+                            message: json.errorMessage ?? "???",
+                        },
+                    ];
+                }
+                else {
+                    return [
+                        {
+                            code: json.errorCode ?? json.failureReason,
+                            message: json.errorMessage,
+                            field: json.field,
+                            hint: json.hint ?? json.clientHint,
+                        },
+                    ];
+                }
             }
             if ("Error" in json) {
-                if (("Code" in json.Error) &&
-                    ("Message" in json.Error)) {
-                    return [{
+                if ("Code" in json.Error && "Message" in json.Error) {
+                    return [
+                        {
                             code: json.Error.Code,
                             message: json.Error.Message,
-                        }];
+                        },
+                    ];
                 }
             }
             if ("code" in json) {
                 // nothing else..
-                return [{
+                return [
+                    {
                         code: json.code,
                         message: json.code?.toString() ?? "???",
-                    }];
+                    },
+                ];
             }
-            return [{
+            return [
+                {
                     message: "Unknown Error",
-                }];
+                },
+            ];
         }
     }
     catch {
