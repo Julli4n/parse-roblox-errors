@@ -11,7 +11,8 @@ type ChallengeType =
   | "reauthentication"
   | "proofofwork"
   | "rostile"
-  | "privateaccesstoken";
+  | "privateaccesstoken"
+  | "deviceintegrity";
 
 export type ParsedChallenge = {
   challengeType: ChallengeType;
