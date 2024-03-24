@@ -1,4 +1,7 @@
 {
+  "name": "@julli4n/parse-roblox-errors",
+  "version": "1.1.9",
+  "exports": "./mod.ts",
   "fmt": {
     "indentWidth": 2,
     "lineWidth": 80,
