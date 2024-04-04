@@ -1,3 +1,4 @@
+import { parseBEDEV2ErrorFromJSON } from "../../mod.js";
 import { parseAnyError } from "../utils/parseAnyError.js";
 export function parseBEDEV1ErrorFromJSON(json) {
     if (typeof json === "string") {
@@ -13,7 +14,20 @@ export function parseBEDEV1ErrorFromJSON(json) {
             }];
     }
     else {
-        return json?.errors ?? [];
+        return json?.errors?.flatMap((error) => {
+            const message = error.message;
+            // Parse the fucking stupid json errors in error.message shit
+            if (message?.startsWith("{")) {
+                try {
+                    const data = JSON.parse(message.trim());
+                    return parseBEDEV2ErrorFromJSON(data);
+                }
+                catch {
+                    return [];
+                }
+            }
+            return error;
+        }) ?? [];
     }
 }
 export function parseBEDEV1ErrorFromString(text, contentType) {

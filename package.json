@@ -1,23 +1,23 @@
 {
-  "module": "./esm/mod.js",
-  "main": "./script/mod.js",
   "name": "parse-roblox-errors",
+  "version": "1.1.10",
   "description": "A Deno/NodeJS module to parse Roblox errors",
-  "version": "1.1.9",
-  "homepage": "https://github.com/Julli4n/parse-roblox-errors",
-  "author": "Julli4n",
-  "bugs": {
-    "url": "https://github.com/Julli4n/parse-roblox-errors/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:Julli4n/parse-roblox-errors.git"
-  },
   "keywords": [
     "roblox",
     "api"
   ],
+  "author": "Julli4n",
+  "homepage": "https://github.com/Julli4n/parse-roblox-errors",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Julli4n/parse-roblox-errors.git"
+  },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Julli4n/parse-roblox-errors/issues"
+  },
+  "main": "./script/mod.js",
+  "module": "./esm/mod.js",
   "exports": {
     ".": {
       "import": "./esm/mod.js",
@@ -40,12 +40,14 @@
     "test": "node test_runner.js"
   },
   "dependencies": {
-    "whatwg-mimetype": "^3.0.0"
+    "whatwg-mimetype": "3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^20.9.0",
     "picocolors": "^1.0.0",
-    "@deno/shim-deno": "~0.16.1",
+    "@deno/shim-deno": "~0.18.0",
+    "whatwg-mimetype": "^3.0.0",
     "@types/whatwg-mimetype": "^2.1.1"
-  }
+  },
+  "_generatedBy": "dnt@dev"
 }

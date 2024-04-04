@@ -9,7 +9,7 @@ var DiffType;
     DiffType["removed"] = "removed";
     DiffType["common"] = "common";
     DiffType["added"] = "added";
-})(DiffType = exports.DiffType || (exports.DiffType = {}));
+})(DiffType || (exports.DiffType = DiffType = {}));
 const REMOVED = 1;
 const COMMON = 2;
 const ADDED = 3;

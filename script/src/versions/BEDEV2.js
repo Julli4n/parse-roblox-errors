@@ -147,6 +147,14 @@ function parseBEDEV2ErrorFromJSON(json) {
                     },
                 ];
             }
+            else if ("ValidationErrors" in json) {
+                return json.ValidationErrors.map(error => ({
+                    code: error.Code,
+                    message: error.Message,
+                    field: error.FieldName,
+                    fieldData: error.FieldData,
+                }));
+            }
             return [
                 {
                     message: "Unknown Error",

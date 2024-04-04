@@ -45,6 +45,33 @@ dntShim.Deno.test({
             },
         ], "1 error object returned");
         (0, deps_js_1.assertEquals)(await (0, mod_js_1.parseBEDEV1Error)((0, responseFromJson_js_1.responseFromJSON)({
+            errors: [
+                {
+                    code: 0,
+                    message: "{\"ValidationErrors\":[{\"Code\":2,\"Message\":\"Invalid value, must be in range [0.9 - 1.05]\",\"FieldName\":\"Height\",\"FieldData\":\"\"},{\"Code\":2,\"Message\":\"Invalid value, must be in range [0.7 - 1]\",\"FieldName\":\"Width\",\"FieldData\":\"\"},{\"Code\":2,\"Message\":\"Invalid value, must be in range [0.95 - 1]\",\"FieldName\":\"Head\",\"FieldData\":\"\"}]}"
+                }
+            ]
+        })), [
+            {
+                code: 2,
+                message: "Invalid value, must be in range [0.9 - 1.05]",
+                field: "Height",
+                fieldData: ""
+            },
+            {
+                code: 2,
+                message: "Invalid value, must be in range [0.7 - 1]",
+                field: "Width",
+                fieldData: ""
+            },
+            {
+                code: 2,
+                message: "Invalid value, must be in range [0.95 - 1]",
+                field: "Head",
+                fieldData: ""
+            }
+        ]);
+        (0, deps_js_1.assertEquals)(await (0, mod_js_1.parseBEDEV1Error)((0, responseFromJson_js_1.responseFromJSON)({
             errors: [{
                     code: 0,
                     message: "Error",

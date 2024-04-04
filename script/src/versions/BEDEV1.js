@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseBEDEV1ErrorFromStringAndHeaders = exports.parseBEDEV1Error = exports.parseBEDEV1ErrorFromString = exports.parseBEDEV1ErrorFromJSON = void 0;
+const mod_js_1 = require("../../mod.js");
 const parseAnyError_js_1 = require("../utils/parseAnyError.js");
 function parseBEDEV1ErrorFromJSON(json) {
     if (typeof json === "string") {
@@ -16,7 +17,20 @@ function parseBEDEV1ErrorFromJSON(json) {
             }];
     }
     else {
-        return json?.errors ?? [];
+        return json?.errors?.flatMap((error) => {
+            const message = error.message;
+            // Parse the fucking stupid json errors in error.message shit
+            if (message?.startsWith("{")) {
+                try {
+                    const data = JSON.parse(message.trim());
+                    return (0, mod_js_1.parseBEDEV2ErrorFromJSON)(data);
+                }
+                catch {
+                    return [];
+                }
+            }
+            return error;
+        }) ?? [];
     }
 }
 exports.parseBEDEV1ErrorFromJSON = parseBEDEV1ErrorFromJSON;

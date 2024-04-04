@@ -1,4 +1,5 @@
-import { type AnyError } from "../types.js";
+import type { AnyError } from "../types.js";
+import { parseAnyError } from "../utils/parseAnyError.js";
 type BEDEV2ErrorResponse = string | string[] | {
     errors?: {
         code?: number | string;
@@ -50,9 +51,16 @@ type BEDEV2ErrorResponse = string | string[] | {
 } | {
     status_code?: number;
     message?: string;
+} | {
+    ValidationErrors: {
+        Code: number;
+        Message: string;
+        FieldName: string;
+        FieldData: string;
+    }[];
 };
 export declare function parseBEDEV2ErrorFromJSON(json: BEDEV2ErrorResponse): AnyError[];
-export declare function parseBEDEV2ErrorFromString(text: string, contentType: string): Promise<AnyError[]>;
-export declare function parseBEDEV2Error(response: Response): Promise<AnyError[]>;
-export declare function parseBEDEV2ErrorFromStringAndHeaders(text: string, headers: Headers): Promise<AnyError[]>;
+export declare function parseBEDEV2ErrorFromString(text: string, contentType: string): ReturnType<typeof parseAnyError>;
+export declare function parseBEDEV2Error(response: Response): ReturnType<typeof parseAnyError>;
+export declare function parseBEDEV2ErrorFromStringAndHeaders(text: string, headers: Headers): ReturnType<typeof parseAnyError>;
 export {};
