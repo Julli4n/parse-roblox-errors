@@ -55,7 +55,7 @@ Deno.test({
         field: "Head",
         fieldData: ""
       }
-    ]);
+    ], "Weird error with real errors under .message returned");
 
     assertEquals(
       await parseBEDEV1Error(responseFromJSON({
