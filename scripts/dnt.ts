@@ -1,5 +1,5 @@
-import { build } from "https://deno.land/x/dnt@0.38.1/mod.ts";
-import { copy } from "https://deno.land/std@0.201.0/fs/mod.ts";
+import { build } from "jsr:@deno/dnt@0.41.1";
+import { copy } from "jsr:@std/fs@0.221.0";
 
 await build({
   entryPoints: [
@@ -30,16 +30,10 @@ await build({
       },
     ],
   },
-  mappings: {
-    "https://esm.sh/v132/whatwg-mimetype@3.0.0": {
-      name: "whatwg-mimetype",
-      version: "^3.0.0",
-    },
-  },
   package: {
     name: "parse-roblox-errors",
     description: "A Deno/NodeJS module to parse Roblox errors",
-    version: "1.1.9",
+    version: "1.1.10",
     homepage: "https://github.com/Julli4n/parse-roblox-errors",
     author: "Julli4n",
     bugs: {

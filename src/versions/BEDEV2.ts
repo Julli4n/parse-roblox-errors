@@ -1,4 +1,4 @@
-import { type AnyError } from "../types.ts";
+import type { AnyError } from "../types.ts";
 import { parseAnyError } from "../utils/parseAnyError.ts";
 
 type BEDEV2ErrorResponse =
@@ -64,6 +64,14 @@ type BEDEV2ErrorResponse =
   | {
     status_code?: number;
     message?: string;
+  }
+  | {
+    ValidationErrors: {
+      Code: number;
+      Message: string;
+      FieldName: string;
+      FieldData: string;
+    }[];
   };
 
 export function parseBEDEV2ErrorFromJSON(
@@ -209,6 +217,13 @@ export function parseBEDEV2ErrorFromJSON(
             message: json.code?.toString() ?? "???",
           },
         ];
+      } else if ("ValidationErrors" in json) {
+        return json.ValidationErrors.map(error => ({
+          code: error.Code,
+          message: error.Message,
+          field: error.FieldName,
+          fieldData: error.FieldData,
+        }));
       }
 
       return [
@@ -222,7 +237,10 @@ export function parseBEDEV2ErrorFromJSON(
   }
 }
 
-export function parseBEDEV2ErrorFromString(text: string, contentType: string) {
+export function parseBEDEV2ErrorFromString(
+  text: string,
+  contentType: string,
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(
     () => text.trim(),
     parseBEDEV2ErrorFromJSON,
@@ -231,10 +249,11 @@ export function parseBEDEV2ErrorFromString(text: string, contentType: string) {
   );
 }
 
-export function parseBEDEV2Error(response: Response) {
+export function parseBEDEV2Error(
+  response: Response,
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(
-    () =>
-      response.clone().text().then((text) => text.trim()),
+    () => response.clone().text().then((text) => text.trim()),
     parseBEDEV2ErrorFromJSON,
     response.headers,
   );
@@ -243,6 +262,6 @@ export function parseBEDEV2Error(response: Response) {
 export function parseBEDEV2ErrorFromStringAndHeaders(
   text: string,
   headers: Headers,
-) {
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(() => text.trim(), parseBEDEV2ErrorFromJSON, headers);
 }

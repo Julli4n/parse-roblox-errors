@@ -1,4 +1,5 @@
-import { type AnyError } from "../types.ts";
+import { parseBEDEV2ErrorFromJSON } from "../../mod.ts";
+import type { AnyError } from "../types.ts";
 import { parseAnyError } from "../utils/parseAnyError.ts";
 
 type BEDEV1ErrorResponse = string | {
@@ -30,11 +31,29 @@ export function parseBEDEV1ErrorFromJSON(
       message: json?.message,
     }];
   } else {
-    return json?.errors ?? [];
+    return json?.errors?.flatMap((error) => {
+      const message = error.message;
+
+      // Parse the fucking stupid json errors in error.message shit
+      if (message?.startsWith("{")) {
+          try {
+            const data = JSON.parse(message.trim());
+
+            return parseBEDEV2ErrorFromJSON(data);
+          } catch {
+            return [];
+          }
+      }
+
+      return error;
+    }) ?? [];
   }
 }
 
-export function parseBEDEV1ErrorFromString(text: string, contentType: string) {
+export function parseBEDEV1ErrorFromString(
+  text: string,
+  contentType: string,
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(
     () => text.trim(),
     parseBEDEV1ErrorFromJSON,
@@ -43,7 +62,9 @@ export function parseBEDEV1ErrorFromString(text: string, contentType: string) {
   );
 }
 
-export function parseBEDEV1Error(response: Response) {
+export function parseBEDEV1Error(
+  response: Response,
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(
     () => response.text().then((text) => text.trim()),
     parseBEDEV1ErrorFromJSON,
@@ -54,7 +75,7 @@ export function parseBEDEV1Error(response: Response) {
 export function parseBEDEV1ErrorFromStringAndHeaders(
   text: string,
   headers: Headers,
-) {
+): ReturnType<typeof parseAnyError> {
   return parseAnyError(
     () => text.trim(),
     parseBEDEV1ErrorFromJSON,
