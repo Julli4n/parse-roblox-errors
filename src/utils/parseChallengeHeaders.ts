@@ -12,7 +12,9 @@ type ChallengeType =
   | "proofofwork"
   | "rostile"
   | "privateaccesstoken"
-  | "deviceintegrity";
+  | "deviceintegrity"
+  | "emailverification"
+  | "phoneverification";
 
 export type ParsedChallenge = {
   challengeType: ChallengeType;
