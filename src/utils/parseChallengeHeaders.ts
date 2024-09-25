@@ -13,6 +13,7 @@ type ChallengeType =
   | "rostile"
   | "privateaccesstoken"
   | "deviceintegrity"
+  | "proofofspace"
   | "emailverification"
   | "phoneverification";
 
