@@ -72,7 +72,10 @@ type BEDEV2ErrorResponse =
       FieldName: string;
       FieldData: string;
     }[];
-  };
+  } | {
+    error: string;
+    reason_code: string;
+  }
 
 export function parseBEDEV2ErrorFromJSON(
   json: BEDEV2ErrorResponse,
@@ -145,6 +148,11 @@ export function parseBEDEV2ErrorFromJSON(
                 : [],
             },
           ];
+        } else if ("reason_code" in json) {
+          return [{
+            code: json.reason_code,
+            message: json.error,
+          }]
         }
       }
 
