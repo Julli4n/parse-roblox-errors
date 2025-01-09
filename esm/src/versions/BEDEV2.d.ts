@@ -58,6 +58,9 @@ type BEDEV2ErrorResponse = string | string[] | {
         FieldName: string;
         FieldData: string;
     }[];
+} | {
+    error: string;
+    reason_code: string;
 };
 export declare function parseBEDEV2ErrorFromJSON(json: BEDEV2ErrorResponse): AnyError[];
 export declare function parseBEDEV2ErrorFromString(text: string, contentType: string): ReturnType<typeof parseAnyError>;
